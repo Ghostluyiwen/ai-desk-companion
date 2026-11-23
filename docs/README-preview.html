@@ -1,0 +1,237 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Codex Desk Display · README 排版预览</title><style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#1f2328;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1012px;margin:26px auto;border:1px solid #d1d9e0;border-radius:7px;overflow:hidden}.top{display:flex;justify-content:space-between;gap:16px;padding:13px 24px;border-bottom:1px solid #d1d9e0;background:#f6f8fa;font-size:13px;color:#59636e}.top strong{color:#1f2328}article{padding:32px}h1,h2,h3{line-height:1.3;margin:24px 0 16px;font-weight:600}h1{font-size:32px;border-bottom:1px solid #d1d9e0;padding-bottom:.3em}h2{font-size:24px;border-bottom:1px solid #d1d9e0;padding-bottom:.3em}h3{font-size:20px}p,ul,ol,table,pre,blockquote{margin-top:0;margin-bottom:16px}img{max-width:100%;height:auto;vertical-align:middle}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}code{font:85% ui-monospace,SFMono-Regular,Consolas,monospace;background:#818b981f;padding:.2em .4em;border-radius:6px}pre{background:#f6f8fa;padding:16px;overflow:auto;border-radius:6px;line-height:1.5}pre code{padding:0;background:none}blockquote{margin-left:0;padding:0 1em;border-left:.25em solid #d1d9e0;color:#59636e}table{border-collapse:collapse;width:100%;font-size:15px}th,td{padding:10px 13px;border:1px solid #d1d9e0}tr:nth-child(even){background:#f6f8fa}td img{max-width:100%}ul,ol{padding-left:2em}li+li{margin-top:.4em}input[type=checkbox]{accent-color:#1f883d}details{margin-bottom:16px}summary{cursor:pointer;margin-bottom:16px}.notice{font-size:12px;color:#59636e;max-width:1012px;padding:0 16px;margin:12px auto 30px}@media(max-width:700px){.wrap{margin:0;border:0;border-radius:0}article{padding:20px 16px}.top{padding:12px 16px}table{font-size:13px}th,td{padding:6px}h1{font-size:27px}h2{font-size:22px}}
+</style></head><body><div class="wrap"><div class="top"><strong>▤ README.md</strong><span>本地排版预览 · GitHub 实际样式可能略有不同</span></div><article class="markdown-body"><div align="center"><img src="../assets/codex-cloud-transparent.png" width="72" alt="Codex theme icon"><h1 id="ai-desk-companion">AI Desk Companion</h1><p><strong>Bring your AI assistant’s activity to your desk.</strong></p>
+<p>A desktop display UI prototype designed for a 480 × 480 touch screen.<br>See when your assistant is working, waiting for you, or finished—alongside weather and computer activity.</p>
+<p><strong>English</strong> | <a href="../README.zh-CN.md">简体中文</a></p>
+<p><code>Browser prototype</code> · <code>Pixel heatmap</code> · <code>Two-page layout</code> · <code>Offline preview</code></p>
+<p><a href="#animations">Animations</a> · <a href="#quick-start">Quick start</a> · <a href="#make-it-yours">Make it yours</a> · <a href="#roadmap">Roadmap</a></p>
+</div><blockquote>
+<p><strong>Project status:</strong> This repository contains an offline browser UI prototype. Tokens, quotas, weather, computer metrics, disk connections, and transfers are simulated. ESP32 firmware and real data collectors are not included yet. You can explore every screen and animation without a development board.</p>
+</blockquote>
+<h2 id="preview">Preview</h2><table>
+<thead>
+<tr>
+<th align="center">01 · Assistant activity</th>
+<th align="center">02 · Weather and computer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="../docs/images/main.png" width="360" alt="Assistant screen with a blue pixel heatmap and token count"></td>
+<td align="center"><img src="../docs/images/weather.png" width="360" alt="Weather screen with performance, network, and four disk slots"></td>
+</tr>
+<tr>
+<td align="center">State, usage, and quotas at a glance</td>
+<td align="center">Weather above, computer metrics below</td>
+</tr>
+</tbody></table>
+<p>The default theme uses Codex artwork and some Chinese UI labels. The UI text and theme can be customized in the source.</p>
+<h2 id="why-this-exists">Why this exists</h2><p>When an AI assistant works on my computer, I want to glance over and know: Is it still working? Is it waiting for me? Has this task finished?</p>
+<p>This little display turns that activity into a blue pixel heatmap that gently expands while work is in progress. When idle, it returns to a clock and weather. A second page adds performance, network, and disk information to make it useful throughout the day.</p>
+<p>The current focus is getting the interface and motion right, before connecting real data and hardware. You are welcome to suggest themes and adaptations for your own desk.</p>
+<h2 id="animations">Animations</h2><h3 id="1--the-complete-assistant-workflow">1 · The complete assistant workflow</h3><p><strong>Stand by → Thinking → Your turn → All set → Stand by</strong>, followed by a short task that finishes after one second of running.</p>
+<p align="center"><img src="../docs/demos/01-main-flow.gif" width="440" alt="Complete assistant state animation"></p><p align="center"><a href="../docs/demos/01-main-flow.mp4">Watch the smooth MP4 · 35 seconds</a></p><h3 id="2--page-transitions-and-disk-transfers">2 · Page transitions and disk transfers</h3><table>
+<thead>
+<tr>
+<th align="center">Switching pages · 13 seconds</th>
+<th align="center">Disk connection and transfer · 33 seconds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="../docs/demos/02-page-transition.gif" width="320" alt="Main screen decodes away, then weather and device details enter"></td>
+<td align="center"><img src="../docs/demos/03-disk-transfer.gif" width="320" alt="Disk insertion, write speed, copy progress, and restored capacity view"></td>
+</tr>
+<tr>
+<td align="center">Main screen exits → weather appears centrally → moves up → device details appear → return</td>
+<td align="center">Connect drives → read and write → overall progress → restore capacity view</td>
+</tr>
+<tr>
+<td align="center"><a href="../docs/demos/02-page-transition.mp4">Watch MP4</a></td>
+<td align="center"><a href="../docs/demos/03-disk-transfer.mp4">Watch MP4</a></td>
+</tr>
+</tbody></table>
+<p>All recordings come directly from this prototype. MP4s are 480 × 480 at 30 fps with no audio. The soft two-note chime can be previewed in the interactive UI. Recordings shorten the completed-state hold to nine seconds; normal choices are two, three, or five minutes.</p>
+<p>The disk demo also shows an indeterminate activity bar when the task total is unknown. Connecting a disk currently updates its slot directly; speed, progress, and the return to capacity view are demonstrated dynamically.</p>
+<p><strong>Try it yourself:</strong> Download the repository and open <a href="../index.html">the interactive prototype</a>, or use <a href="../docs/showcase.html">the video gallery</a>. GitHub’s file viewer does not execute these HTML pages; open them locally after downloading.</p>
+<h2 id="features">Features</h2><ul>
+<li><strong>Weekly activity heatmap:</strong> Blue shades represent simulated activity intensity. Idle mode retains the usage pattern; running mode adds gentle expansion and an increasing token count.</li>
+<li><strong>Four assistant states:</strong> <code>Stand by</code>, <code>Thinking…</code>, <code>Your turn</code>, and <code>All set</code>. Thinking has a purple gradient and subtle icon motion.</li>
+<li><strong>Text transitions:</strong> Outgoing content decodes away. Attention and completion screens introduce a greeting before moving it upward and revealing status text. Completion automatically returns to idle.</li>
+<li><strong>Weather-first second page:</strong> Weather and time appear above compact CPU, RAM, upload, and download metrics. Four disk slots sit at the lower right.</li>
+<li><strong>Contextual disk information:</strong> The source shows free space, the destination shows MB/s, and an idle connected slot shows simulated overall copy progress. Disconnected slots appear gray.</li>
+<li><strong>Soft chime and gradient blur:</strong> Preview a two-note sound; a downward blur gradient supports readable text. The UI respects the system’s reduced-motion setting.</li>
+</ul>
+<h3 id="implementation-status">Implementation status</h3><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Two-page layout, heatmap, state and text animations</td>
+<td>Implemented in the browser</td>
+</tr>
+<tr>
+<td>Weather, metrics, quotas, and disk transfers</td>
+<td>UI implemented with simulated data</td>
+</tr>
+<tr>
+<td>Live Codex state, tokens, and quota</td>
+<td>Data sources and semantics still need verification</td>
+</tr>
+<tr>
+<td>Claude / Claude Code, WorkBuddy, or other themes</td>
+<td>Editable in source; no built-in theme selector or live adapters</td>
+</tr>
+<tr>
+<td>ESP32 firmware, flashing, and touch testing</td>
+<td>Planned</td>
+</tr>
+</tbody></table>
+<h2 id="quick-start">Quick start</h2><p><strong>No dependencies are required to view the prototype.</strong> Download and extract the repository, then open <code>index.html</code> in a modern browser.</p>
+<p>Alternatively, serve the repository locally:</p>
+<pre><code class="language-bash">python3 -m http.server 8000
+</code></pre>
+<p>Open <a href="http://localhost:8000">http://localhost:8000</a>.</p>
+<p>Suggested walkthrough (the controls currently use Chinese labels):</p>
+<ol>
+<li>Click <strong>重播完整流程</strong> to replay idle, running, attention, completion, and automatic return.</li>
+<li>Click <strong>快速完成</strong> to test a short task.</li>
+<li>Click <strong>天气第二页</strong>, or swipe horizontally on the main display.</li>
+<li>Cycle the external disk count, then click <strong>模拟复制任务</strong> to simulate copying.</li>
+<li>Click <strong>仅监测读写</strong> for unknown-total activity, and <strong>试听</strong> to hear the chime.</li>
+</ol>
+<p>The preview makes no network requests, reads no actual system metrics, and needs no API key. Some preferences are saved in browser local storage; the preview still works if storage is unavailable.</p>
+<h2 id="make-it-yours">Make it yours</h2><p><strong>Codex is the current theme, rather than a requirement for the design.</strong> Ask a coding-capable AI assistant to change the icon, colors, state labels, and greeting for Claude / Claude Code, WorkBuddy, or your own assistant.</p>
+<p>The Tencent product is spelled <strong>WorkBuddy</strong>; see its <a href="https://cloud.tencent.com/product/workbuddy">official product page</a>. For a Claude coding-assistant theme, <strong>Claude Code</strong> is an appropriate label.</p>
+<table>
+<thead>
+<tr>
+<th>Customization</th>
+<th>Where to change it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Icon</td>
+<td>Supply a transparent PNG and update the embedded image data and drawing dimensions in <code>src/preview.html</code>. Replacing the file in <code>assets/</code> alone does not update the canvas icon</td>
+</tr>
+<tr>
+<td>Colors, heatmap, background, typography</td>
+<td>Drawing functions and colors in <code>src/preview.html</code></td>
+</tr>
+<tr>
+<td>State labels, greeting, and task messages</td>
+<td><code>labels</code>, <code>drawTop</code>, <code>drawStatus</code>, and related text</td>
+</tr>
+<tr>
+<td>City, weather, disk names, capacities</td>
+<td>Weather and device demo data</td>
+</tr>
+<tr>
+<td>Live activity and usage</td>
+<td>A separate adapter for the selected assistant, using verified interfaces, events, or logs</td>
+</tr>
+</tbody></table>
+<p>Copy this prompt into your coding assistant:</p>
+<pre><code class="language-text">Read README.md and src/preview.html, then adapt the current Codex theme
+for Claude Code (or WorkBuddy).
+
+I will supply a transparent icon that I have permission to use.
+1. Replace the embedded canvas icon; avoid white borders and stretching.
+2. Adapt accent colors, state labels, and the greeting.
+3. Preserve both pages, transitions, gradient blur, and disk demos.
+4. Keep simulated data for now. Do not describe a theme change as a live integration.
+5. Run python3 scripts/build_preview.py to regenerate index.html.
+   Check all four states, short-task completion, page switching, and disk activity.
+6. Before implementing live integration, identify verified data sources
+   and any missing interfaces.
+</code></pre>
+<p>Changing appearance and connecting live data are separate steps. A new icon previews a new theme; following another assistant’s actual activity requires its state, token, or quota data. This repository does not yet provide live adapters for any assistant.</p>
+<h2 id="structure-and-development">Structure and development</h2><pre><code class="language-text">ai-desk-companion/
+├── index.html                  # Standalone interactive preview
+├── src/preview.html            # UI, drawing logic, and simulated data
+├── scripts/build_preview.py    # Standard-library Python build script
+├── assets/                     # Theme artwork and audio
+├── docs/
+│   ├── demos/                  # Three GIF and MP4 recordings
+│   ├── images/                 # Screenshots
+│   ├── showcase.html           # Local video gallery
+│   └── README-preview.html     # Local README layout preview
+├── README.md                   # English
+└── README.zh-CN.md             # Simplified Chinese
+</code></pre>
+<p>After editing the source, regenerate the standalone page:</p>
+<pre><code class="language-bash">python3 scripts/build_preview.py
+</code></pre>
+<p>Building does not require Node.js or npm. Commit both the source and generated <code>index.html</code> so others can preview it immediately. Update screenshots and recordings when changing the theme.</p>
+<h2 id="target-hardware-and-integration-plan">Target hardware and integration plan</h2><p>The target is the <a href="https://docs.waveshare.com/ESP32-S3-Touch-AMOLED-2.16">Waveshare ESP32-S3-Touch-AMOLED-2.16</a>: a 2.16-inch, 480 × 480 touch AMOLED board with 16 MB Flash, 8 MB PSRAM, Wi-Fi, USB, and RTC resources. Hardware adaptation and testing are still pending.</p>
+<p>Planned architecture:</p>
+<pre><code class="language-text">Assistant events / computer metrics → computer collector → USB or LAN → ESP32 UI
+Weather API / network time ──────────────────────────────────────────→ ESP32
+</code></pre>
+<p>This is a proposed architecture; only the browser prototype exists today. The device would store firmware, artwork, and settings and draw the interface locally while the computer sends state data. Frame rate, blur implementation, and memory use need testing on the actual board.</p>
+<details>
+<summary>Data sources and disk progress limitations</summary><table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Proposed source</th>
+<th>Current limitation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Assistant state, tokens, quotas</td>
+<td>Available APIs, events, or local logs</td>
+<td>Unverified; each assistant needs its own adapter</td>
+</tr>
+<tr>
+<td>CPU, RAM, network, disk I/O</td>
+<td>Computer collector, roughly once per second</td>
+<td>Not implemented</td>
+</tr>
+<tr>
+<td>Disk space and connections</td>
+<td>Volume and filesystem information</td>
+<td>Physical disk counters must be mapped to volumes correctly on macOS</td>
+</tr>
+<tr>
+<td>Exact copy percentage</td>
+<td>A task with known total and completed bytes</td>
+<td>Raw disk I/O cannot identify one task’s progress</td>
+</tr>
+<tr>
+<td>Weather</td>
+<td>Device requests to a weather API, potentially Open-Meteo</td>
+<td>City, connectivity, and availability need testing</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Network synchronization and onboard RTC</td>
+<td>Offline accuracy and power-loss retention need testing</td>
+</tr>
+</tbody></table>
+<p>Caching, background I/O, and parallel tasks affect disk speed. Without a known task total, show activity and unknown progress rather than inventing a percentage.</p>
+<p>References: <a href="https://psutil.readthedocs.io/stable/">psutil</a>, <a href="https://developer.apple.com/documentation/foundation/progress">Apple Progress</a>, <a href="https://open-meteo.com/en/docs">Open-Meteo</a>.</p>
+</details><h2 id="roadmap">Roadmap</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> Two-page layout, blue heatmap, and state animation prototype.</li>
+<li><input checked="" disabled="" type="checkbox"> GIF / MP4 recordings of states, page transitions, and disk activity.</li>
+<li><input checked="" disabled="" type="checkbox"> Offline preview and theme customization guide.</li>
+<li><input disabled="" type="checkbox"> Verify Codex state, token, and quota sources and reporting semantics.</li>
+<li><input disabled="" type="checkbox"> Build a computer collector for performance, network, and disks.</li>
+<li><input disabled="" type="checkbox"> Implement ESP32 display, touch, communication, and firmware support.</li>
+<li><input disabled="" type="checkbox"> Add weather, time synchronization, and offline behavior.</li>
+<li><input disabled="" type="checkbox"> Support trackable copy tasks and disk hot-plug events.</li>
+<li><input disabled="" type="checkbox"> Add adapters and theme configuration for other AI assistants.</li>
+</ul>
+<h2 id="feedback-and-contributions">Feedback and contributions</h2><p>Suggestions, theme experiments, layout improvements, and adaptation reports are welcome.</p>
+<p>For visual issues, include your browser, reproduction steps, expected behavior, and a screenshot or recording. Before submitting changes, check all four states, short tasks, page switching, and disk demos. For live integrations, describe the data source and any unsupported cases.</p>
+<h2 id="references-and-thanks">References and thanks</h2><p>README organization was informed by these related projects:</p>
+<ul>
+<li><a href="https://github.com/underactive/pixel-agents-esp32">Pixel Agents ESP32</a>: hardware, architecture, project structure, and customization documentation.</li>
+<li><a href="https://github.com/DanWahlin/agent-buddy">Agent Buddy</a>: previews, quick start, state descriptions, and customization.</li>
+<li><a href="https://github.com/bdw547/usage-display">usage-display</a>: usage display and collection architecture documentation.</li>
+</ul>
+<p>These are documentation references, not a claim that this prototype includes their firmware, collectors, or supported integrations. No code or assets from those projects were introduced during this documentation update.</p>
+<h2 id="license-and-branding">License and branding</h2><p>No code license has been selected yet. A <code>LICENSE</code> file will be added once one is chosen; making a repository public does not by itself grant an open-source license.</p>
+<p>This is an unofficial personal prototype. Codex, Claude, WorkBuddy, and their marks belong to their respective owners. The icon was prepared from a user-supplied reference; brand assets are not licensed through the project’s code. This project is not officially affiliated with OpenAI, Anthropic, Tencent, or Waveshare.</p>
+</article></div><p class="notice">此页面从 README.md 生成，便于审核正文与排版；项目仓库：Ghostluyiwen/ai-desk-companion。</p></body></html>
